@@ -1,1 +1,1186 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hidden Gems BW | Showcasing Botswana's Treasures</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #3a6ea5;
+            --secondary: #004e98;
+            --accent: #ff6b6b;
+            --light: #f5f5f5;
+            --dark: #333;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .page {
+            display: none;
+            padding: 3rem 0;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1570586437265-ab357bfe067d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 6rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* About Page */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .profile-img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-text h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        /* Botswana Gems Section */
+        .botswana-gems {
+            margin: 4rem 0;
+        }
+        
+        .gems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .gem-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .gem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gem-img {
+            height: 200px;
+            background-position: center;
+            background-size: cover;
+        }
+        
+        .gem-content {
+            padding: 1.5rem;
+        }
+        
+        .gem-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .gem-content p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .read-more:hover {
+            color: var(--accent);
+        }
+        
+        /* Resume Page */
+        .resume-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+        
+        .experience, .education {
+            margin-bottom: 2.5rem;
+        }
+        
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+        
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 25px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background: var(--primary);
+        }
+        
+        .timeline-item:last-child:after {
+            display: none;
+        }
+        
+        .timeline-item h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-item .date {
+            color: #777;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .skills-list {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .skill {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background: #e9e9e9;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-level {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        /* Blog Pages */
+        .blog-post {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .blog-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .blog-title {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-meta {
+            color: #777;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            color: #444;
+        }
+        
+        /* Contact Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 110, 165, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Resources Page */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .resource-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-card h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .resource-list {
+            list-style: none;
+        }
+        
+        .resource-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .resource-list li:before {
+            content: '➤';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        
+        .resource-list a {
+            color: #444;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .resource-list a:hover {
+            color: var(--accent);
+        }
+        
+        /* Projects Page */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-img {
+            height: 200px;
+            background-position: center;
+            background-size: cover;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .project-content p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content, .resume-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-gem"></i>
+                The Hidden <span>Gems</span> BW
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" data-page="home">Home</a></li>
+                    <li><a href="#" data-page="about">About Me</a></li>
+                    <li><a href="#" data-page="resume">Resume</a></li>
+                    <li><a href="#" data-page="blog">Blog</a></li>
+                    <li><a href="#" data-page="skills">Skills & Projects</a></li>
+                    <li><a href="#" data-page="contact">Contact</a></li>
+                    <li><a href="#" data-page="resources">Study Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1>Discover Botswana's Hidden Treasures</h1>
+                <p>Join me on a journey to explore Botswana's cultural heritage, unique destinations, and rich identity that often remain unseen by the world.</p>
+                <a href="#" data-page="about" class="btn">Explore With Me</a>
+            </div>
+
+            <h2 class="page-title">Botswana's Hidden Gems</h2>
+            
+            <div class="gems-grid">
+                <div class="gem-card">
+                    <div class="gem-img" style="background-image: url('https://images.unsplash.com/photo-1570586437265-ab357bfe067d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                    <div class="gem-content">
+                        <h3>Tsodilo Hills</h3>
+                        <p>The Louvre of the Desert with over 4,500 rock paintings, a UNESCO World Heritage site that holds spiritual significance for the San people.</p>
+                        <a href="#" class="read-more">Discover More →</a>
+                    </div>
+                </div>
+                
+                <div class="gem-card">
+                    <div class="gem-img" style="background-image: url('https://images.unsplash.com/photo-1596733430284-f7437764b1a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                    <div class="gem-content">
+                        <h3>Okavango Delta</h3>
+                        <p>One of the world's largest inland deltas, a unique pulsing wetland that provides a vital habitat for countless species and a stunning landscape.</p>
+                        <a href="#" class="read-more">Discover More →</a>
+                    </div>
+                </div>
+                
+                <div class="gem-card">
+                    <div class="gem-img" style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                    <div class="gem-content">
+                        <h3>Tswapong Hills</h3>
+                        <p>An area of great historical and spiritual significance with numerous villages, waterfalls, and ancient ruins waiting to be explored.</p>
+                        <a href="#" class="read-more">Discover More →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="botswana-gems">
+                <h2 class="page-title">Why Botswana's Heritage Matters</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">
+                    Botswana's cultural heritage and natural wonders represent a unique identity that has been preserved for centuries. 
+                    Through this platform, I aim to showcase these treasures while sharing my own journey of discovery and professional growth.
+                </p>
+            </div>
+        </section>
+
+        <!-- About Me Page -->
+        <section id="about" class="page">
+            <h2 class="page-title">About Me</h2>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="profile-img" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'); height: 400px;"></div>
+                </div>
+                
+                <div class="about-text">
+                    <h2>Hello, I'm The Hidden Gems BW</h2>
+                    <p>Welcome to my personal blog and platform dedicated to showcasing Botswana's hidden treasures! I'm a passionate advocate for cultural preservation and sustainable tourism, with a deep love for my country's rich heritage.</p>
+                    
+                    <p>My journey began while studying Computer Science, where I discovered the power of technology to share stories and connect people across distances. I realized that many of Botswana's most beautiful places and cultural traditions remained unknown to the wider world.</p>
+                    
+                    <p>This platform is my contribution to changing that narrative. Here, I combine my technical skills with my passion for exploration to document and share the wonders of Botswana while also showcasing my professional journey.</p>
+                    
+                    <p>When I'm not coding or researching, you can find me exploring remote areas of Botswana, meeting with local communities to learn about their traditions, or photographing the stunning landscapes that make this country unique.</p>
+                    
+                    <p>My mission is to inspire appreciation for Botswana's rich identity while developing skills that can contribute to sustainable development and cultural preservation.</p>
+                    
+                    <a href="#" data-page="contact" class="btn">Get In Touch</a>
+                </div>
+            </div>
+
+            <div class="botswana-gems">
+                <h2 class="page-title">My Botswana Journey</h2>
+                <div class="gems-grid">
+                    <div class="gem-card">
+                        <div class="gem-img" style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                        <div class="gem-content">
+                            <h3>Cultural Documentation</h3>
+                            <p>Preserving oral histories and traditions from Botswana's diverse ethnic groups through digital storytelling.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gem-card">
+                        <div class="gem-img" style="background-image: url('https://images.unsplash.com/photo-1596733430284-f7437764b1a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                        <div class="gem-content">
+                            <h3>Eco-Tourism Advocacy</h3>
+                            <p>Promoting sustainable travel practices that benefit local communities while protecting Botswana's natural wonders.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gem-card">
+                        <div class="gem-img" style="background-image: url('https://images.unsplash.com/photo-1570586437265-ab357bfe067d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                        <div class="gem-content">
+                            <h3>Digital Preservation</h3>
+                            <p>Using technology to create digital archives of Botswana's cultural heritage for future generations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Page -->
+        <section id="resume" class="page">
+            <h2 class="page-title">My Resume</h2>
+            
+            <div class="resume-container">
+                <div class="main-content">
+                    <div class="experience">
+                        <h2>Work Experience</h2>
+                        
+                        <div class="timeline-item">
+                            <h3>Cultural Heritage Researcher</h3>
+                            <span class="date">January 2022 - Present</span>
+                            <p>Botswana Tourism Organization, Gaborone</p>
+                            <p>Documenting and promoting Botswana's cultural heritage sites, developing digital content for tourism promotion, and collaborating with local communities to preserve cultural traditions.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h3>Web Developer Intern</h3>
+                            <span class="date">June 2021 - December 2021</span>
+                            <p>Tech Solutions BW, Gaborone</p>
+                            <p>Developed and maintained client websites, implemented responsive design principles, and collaborated with senior developers on complex projects.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="education">
+                        <h2>Education</h2>
+                        
+                        <div class="timeline-item">
+                            <h3>Bachelor of Arts in Digital Media</h3>
+                            <span class="date">2018 - 2022</span>
+                            <p>University of Botswana, Gaborone</p>
+                            <p>Specialized in digital storytelling and cultural preservation. Graduated with honors.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h3>Web Development Certificate</h3>
+                            <span class="date">2020</span>
+                            <p>FreeCodeCamp</p>
+                            <p>Completed 300-hour coding bootcamp covering HTML, CSS, JavaScript, and responsive web design.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar">
+                    <div class="skills-list">
+                        <h2>Skills</h2>
+                        
+                        <div class="skill">
+                            <h3>HTML/CSS <span>90%</span></h3>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill">
+                            <h3>JavaScript <span>85%</span></h3>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill">
+                            <h3>Digital Photography <span>80%</span></h3>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill">
+                            <h3>Cultural Research <span>95%</span></h3>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill">
+                            <h3>Content Writing <span>88%</span></h3>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-resume">
+                        <a href="#" class="btn" style="margin-top: 2rem; display: block; text-align: center;">Download Full Resume</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Page -->
+        <section id="blog" class="page">
+            <h2 class="page-title">Reflective Blog</h2>
+            
+            <div class="blog-post">
+                <div class="blog-header">
+                    <h2 class="blog-title">Reflective Blog: Group Work Experience</h2>
+                    <div class="blog-meta">
+                        <span>Published: May 15, 2023</span>
+                        <span>Category: Academic Experience</span>
+                    </div>
+                </div>
+                
+                <div class="blog-content">
+                    <p>Throughout my academic journey, I've participated in numerous group projects that have shaped my understanding of collaboration, communication, and teamwork. In this reflective piece, I'll share the challenges, triumphs, and valuable lessons learned from these experiences.</p>
+                    
+                    <p>One particularly memorable project was developing a comprehensive web application for our final year project. Our team of four had to conceptualize, design, and implement a solution addressing real-world problems in education technology.</p>
+                    
+                    <p>The initial phase was challenging as we had to align our different visions and work styles. We established regular meetings, set clear milestones, and divided tasks based on individual strengths. I took on the role of front-end development and project coordination.</p>
+                    
+                    <p>Communication emerged as the most critical factor in our success. We implemented daily check-ins and used collaborative tools like Trello and GitHub to track progress. When conflicts arose regarding design choices, we learned to compromise and focus on the project's overall objectives.</p>
+                    
+                    <p>This experience taught me the importance of adaptability in group settings. When one team member faced personal challenges, we redistributed workloads without judgment, maintaining project momentum while supporting our colleague.</p>
+                    
+                    <p>The project culminated in a functional application that exceeded our expectations and received positive feedback from our instructors. More importantly, it transformed how I approach collaborative work, emphasizing empathy, clear communication, and the value of diverse perspectives.</p>
+                    
+                    <p>Looking back, I recognize that the challenges we faced were opportunities for growth. The skills I developed through this experience—conflict resolution, project management, and adaptive teamwork—have proven invaluable in both academic and professional contexts.</p>
+                </div>
+            </div>
+            
+            <div class="blog-post">
+                <div class="blog-header">
+                    <h2 class="blog-title">Exploring Botswana's Cultural Heritage</h2>
+                    <div class="blog-meta">
+                        <span>Published: April 3, 2023</span>
+                        <span>Category: Cultural Exploration</span>
+                    </div>
+                </div>
+                
+                <div class="blog-content">
+                    <p>My journey into documenting Botswana's cultural heritage began somewhat unexpectedly during my second year of university. What started as a research project quickly evolved into a passion that would shape my academic and professional trajectory.</p>
+                    
+                    <p>I still remember the first time I visited the Tsodilo Hills, a UNESCO World Heritage site known as the "Louvre of the Desert." Standing before ancient rock paintings that dated back thousands of years, I felt a profound connection to the people who had created them.</p>
+                    
+                    <p>The learning curve was steep at times. There were moments of frustration when communities were hesitant to share their traditions, and concepts like cultural appropriation seemed difficult to navigate. However, each challenge overcome brought a new level of understanding and respect.</p>
+                    
+                    <p>What kept me motivated was the tangible impact of this work. Unlike some theoretical concepts, I could immediately see how documenting and sharing these cultural treasures helped preserve them for future generations while creating economic opportunities for local communities.</p>
+                    
+                    <p>My internship at the Botswana Tourism Organization was a turning point. Working alongside experienced cultural researchers accelerated my learning exponentially. Field visits, interviews with elders, and exposure to preservation techniques transformed my approach to cultural documentation.</p>
+                    
+                    <p>Now, as I continue this work, I reflect on how far I've come. From basic documentation to creating digital archives and interactive experiences, the journey has been challenging but immensely rewarding.</p>
+                    
+                    <p>To those beginning their journey in cultural preservation, my advice is to approach with humility, build genuine relationships with communities, and never stop learning. The field requires sensitivity, but the rewards of helping preserve unique cultural identities are immeasurable.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills & Projects Page -->
+        <section id="skills" class="page">
+            <h2 class="page-title">Skills & Projects</h2>
+            
+            <div class="skills-container">
+                <h2>Technical Skills</h2>
+                
+                <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                    <div class="skill-category">
+                        <h3>Web Development</h3>
+                        <ul>
+                            <li>HTML5 & CSS3</li>
+                            <li>JavaScript (ES6+)</li>
+                            <li>Responsive Design</li>
+                            <li>WordPress</li>
+                            <li>UI/UX Design</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Digital Media</h3>
+                        <ul>
+                            <li>Photography</li>
+                            <li>Video Production</li>
+                            <li>Photo Editing</li>
+                            <li>Digital Storytelling</li>
+                            <li>Content Creation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Research & Documentation</h3>
+                        <ul>
+                            <li>Cultural Research</li>
+                            <li>Interview Techniques</li>
+                            <li>Ethnographic Studies</li>
+                            <li>Academic Writing</li>
+                            <li>Digital Archives</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>Featured Projects</h2>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                        <div class="project-content">
+                            <h3>Digital Botswana Heritage Archive</h3>
+                            <p>An online platform documenting Botswana's cultural heritage with interactive maps, photo galleries, and oral history recordings.</p>
+                            <a href="#" class="read-more">View Project →</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1484804959297-65e7c19d7c9f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                        <div class="project-content">
+                            <h3>Eco-Tourism Initiative Website</h3>
+                            <p>A comprehensive website for a community-based eco-tourism project in the Okavango Delta region.</p>
+                            <a href="#" class="read-more">View Project →</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1518998053901-5348d3961a04?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                        <div class="project-content">
+                            <h3>Cultural Exchange Platform</h3>
+                            <p>An online platform connecting international students with local communities for cultural exchange experiences.</p>
+                            <a href="#" class="read-more">View Project →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact" class="page">
+            <h2 class="page-title">Contact Me</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                <div>
+                    <h2>Get In Touch</h2>
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out to me using the contact form or through any of the social links.</p>
+                    
+                    <div style="margin-top: 2rem;">
+                        <h3>Contact Information</h3>
+                        <p>Email: contact@hiddengemsbw.com</p>
+                        <p>Phone: +267 123 4567</p>
+                        <p>Location: Gaborone, Botswana</p>
+                    </div>
+                    
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2>Application Letter</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Your Name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Your Email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="position">Position Applying For</label>
+                            <input type="text" id="position" class="form-control" placeholder="Position Title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Cover Letter</label>
+                            <textarea id="message" class="form-control" placeholder="Your application letter..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="resume">Upload Resume (Optional)</label>
+                            <input type="file" id="resume" class="form-control">
+                        </div>
+                        
+                        <button type="submit" class="btn">Submit Application</button>
+                    </form>
+                    
+                    <div style="margin-top: 3rem;">
+                        <h3>Email Template</h3>
+                        <p>For quick reference, here's a basic email template you can use:</p>
+                        <div style="background: #f5f5f5; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                            <p>Subject: Application for [Position] - [Your Name]</p>
+                            <p>Dear [Hiring Manager Name],</p>
+                            <p>I am writing to express my interest in the [Position] at [Company Name] that I discovered through [Platform]. With my background in [Relevant Skills/Experience], I am confident I possess the necessary skills to excel in this role.</p>
+                            <p>Please find my resume attached for your consideration. I look forward to the opportunity to discuss how my qualifications align with your needs.</p>
+                            <p>Best regards,<br>[Your Name]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Study Resources Page -->
+        <section id="resources" class="page">
+            <h2 class="page-title">Study Tips & Resources</h2>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3>Effective Study Techniques</h3>
+                    <ul class="resource-list">
+                        <li><a href="#">Pomodoro Technique Explained</a></li>
+                        <li><a href="#">Active Recall Methods</a></li>
+                        <li><a href="#">Spaced Repetition Systems</a></li>
+                        <li><a href="#">Mind Mapping for Complex Topics</a></li>
+                        <li><a href="#">The Feynman Technique</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Research Resources</h3>
+                    <ul class="resource-list">
+                        <li><a href="#">Botswana National Archives</a></li>
+                        <li><a href="#">University of Botswana Library</a></li>
+                        <li><a href="#">Cultural Research Methodology</a></li>
+                        <li><a href="#">Ethnographic Interview Techniques</a></li>
+                        <li><a href="#">Digital Preservation Tools</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Web Development Learning</h3>
+                    <ul class="resource-list">
+                        <li><a href="#">FreeCodeCamp Curriculum</a></li>
+                        <li><a href="#">MDN Web Docs</a></li>
+                        <li><a href="#">CSS-Tricks Guide</a></li>
+                        <li><a href="#">JavaScript Best Practices</a></li>
+                        <li><a href="#">Responsive Design Patterns</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Cultural Heritage References</h3>
+                    <ul class="resource-list">
+                        <li><a href="#">UNESCO World Heritage Sites</a></li>
+                        <li><a href="#">Botswana Cultural Practices</a></li>
+                        <li><a href="#">San People History</a></li>
+                        <li><a href="#">Tswana Traditions</a></li>
+                        <li><a href="#">Oral History Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Productivity Tools</h3>
+                    <ul class="resource-list">
+                        <li><a href="#">Notion for Research Organization</a></li>
+                        <li><a href="#">Trello for Project Management</a></li>
+                        <li><a href="#">Zotero for Citation Management</a></li>
+                        <li><a href="#">Google Scholar Alerts</a></li>
+                        <li><a href="#">Time Blocking Techniques</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Career Development</h3>
+                    <ul class="resource-list">
+                        <li><a href="#">Building a Portfolio</a></li>
+                        <li><a href="#">Networking Strategies</a></li>
+                        <li><a href="#">Interview Preparation</a></li>
+                        <li><a href="#">Freelancing Basics</a></li>
+                        <li><a href="#">Professional Branding</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                <h2 class="page-title">My Study Philosophy</h2>
+                <p>Throughout my academic journey, I've discovered that effective learning is about consistency rather than cramming. I believe in:</p>
+                <ul style="list-style-type: none; margin: 1.5rem 0;">
+                    <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">➤ <strong>Active learning</strong> - Engaging with material through questions and practice</li>
+                    <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">➤ <strong>Consistent review</strong> - Using spaced repetition to move knowledge to long-term memory</li>
+                    <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">➤ <strong>Practical application</strong> - Building projects to solidify understanding</li>
+                    <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative;">➤ <strong>Teaching others</strong> - Explaining concepts to deepen my own understanding</li>
+                </ul>
+                <p>This approach has helped me succeed in both technical fields like web development and content-heavy fields like cultural research.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>The Hidden Gems BW</h3>
+                    <p>Showcasing Botswana's cultural heritage and unique destinations while sharing my professional journey.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-page="home">Home</a></li>
+                        <li><a href="#" data-page="about">About Me</a></li>
+                        <li><a href="#" data-page="resume">Resume</a></li>
+                        <li><a href="#" data-page="blog">Blog</a></li>
+                        <li><a href="#" data-page="skills">Skills & Projects</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Email: contact@hiddengemsbw.com</p>
+                    <p>Phone: +267 123 4567</p>
+                    <p>Location: Gaborone, Botswana</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 The Hidden Gems BW. All rights reserved. | Celebrating Botswana's Rich Heritage</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple page navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageLinks = document.querySelectorAll('a[data-page]');
+            
+            pageLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Hide all pages
+                    document.querySelectorAll('.page').forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
+                    // Show target page
+                    document.getElementById(targetPage).classList.add('active');
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
